@@ -43,12 +43,36 @@ namespace plagiarismFinder
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = textBox1.Text;
-            MessageBox.Show(filename);
-            if(filename !=null)
+            double one = 0.0;
+            double two = 0.0;
+            double three = 0.0;
+            double four = 0.0;
+            double five = 0.0;
+            double final = 0.0;
+
+            string path = @"c:\daa\";
+            string userfileName= @"c:\daa\sFiles\users.pdf";
+
+            string userfile = textBox1.Text;
+            
+            int ws = Convert.ToInt32(textBox2.Text);
+            if(userfile !=null && ws > 0)
             {
                 Main pdf = new Main();
-                MessageBox.Show(pdf.ReadRawPdf(filename));
+
+                pdf.ProcessPdfFiles(path,ws);
+                string data=pdf.ReadRawPdf(userfile);
+                if (pdf.CreatePdf(userfileName, pdf.ProcessPdf(data, ws)))
+                {
+                    string[] arr = pdf.ReadProcessPdf(userfileName);
+
+                    MessageBox.Show("Done");
+
+                    
+                }
+                
+                
+
             }
         }
     }
