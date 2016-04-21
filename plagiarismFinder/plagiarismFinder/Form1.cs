@@ -61,100 +61,116 @@ namespace plagiarismFinder
             if (userfile != null && ws > 0)
             {
                 Main pdf = new Main();
-
+                string data = pdf.ReadRawPdf(userfile);
                 pdf.ProcessPdfFiles(path, ws);
                 string tmp = pdf.ReadRawPdf(sfiles + "finals.pdf");
-                pdf.CreatePdf(sfiles+ "ufinals.pdf", pdf.removeDuplicatePdf(tmp.ToString()));
-                string data = pdf.ReadRawPdf(userfile);
-                if (pdf.CreatePdf(userfileName, pdf.ProcessPdf(data, ws)))
+                string dr = pdf.removeDuplicatePdf(tmp);
+                pdf.CreatePdf(sfiles + "ufinals.pdf", dr);
+
+                string uf = pdf.ProcessPdf(data, ws);
+                pdf.CreatePdf(userfileName,uf);
+
+                string[] users = pdf.ReadProcessPdf(userfileName);
+
+                string[] f1 = pdf.ReadProcessPdf(sfiles + "1s.pdf");
+                string[] f2 = pdf.ReadProcessPdf(sfiles + "2s.pdf");
+                string[] f3 = pdf.ReadProcessPdf(sfiles + "3s.pdf");
+                string[] f4 = pdf.ReadProcessPdf(sfiles + "4s.pdf");
+                string[] f5 = pdf.ReadProcessPdf(sfiles + "5s.pdf");
+                string[] ffinal = pdf.ReadProcessPdf(sfiles + "ufinals.pdf");
+
+
+                one = pdf.compareFiles(users, f1);
+                two = pdf.compareFiles(users, f2);
+                three = pdf.compareFiles(users, f3);
+                four = pdf.compareFiles(users, f4);
+                five = pdf.compareFiles(users, f5);
+                final = pdf.compareFiles(users, ffinal);
+
+
+
+                
+
+
+                double max = pdf.findMax(one, two, three, four, five);
+                if (one > 0)
                 {
-                    string[] users = pdf.ReadProcessPdf(userfileName);
-                    one=pdf.compareFiles(users, pdf.ReadProcessPdf(sfiles+"1s.pdf"));
-                    two = pdf.compareFiles(users, pdf.ReadProcessPdf(sfiles + "2s.pdf"));
-                    three = pdf.compareFiles(users, pdf.ReadProcessPdf(sfiles + "3s.pdf"));
-                    four = pdf.compareFiles(users, pdf.ReadProcessPdf(sfiles + "4s.pdf"));
-                    five = pdf.compareFiles(users, pdf.ReadProcessPdf(sfiles + "5s.pdf"));
-                    final = pdf.compareFiles(users, pdf.ReadProcessPdf(sfiles + "ufinals.pdf"));
-
-                    double max = pdf.findMax(one,two,three,four,five);
-                    if (one > 0)
-                    {
-                        label10.Text = one.ToString("#.#####")+"%";
-                    }
-                    else
-                    {
-                        label10.Text = "0 %";
-                    }
-
-
-
-
-                    if (two > 0)
-                    {
-                        label11.Text = two.ToString("#.#####") + "%";
-                    }
-                    else
-                    {
-                        label11.Text = "0 %";
-                    }
-
-                    if (three > 0)
-                    {
-                        label12.Text = three.ToString("#.#####") + "%";
-                    }
-                    else
-                    {
-                        label12.Text = "0 %";
-                    }
-
-
-
-
-                    if (four > 0)
-                    {
-                        label13.Text = four.ToString("#.#####") + "%";
-                    }
-                    else
-                    {
-                        label13.Text = "0 %";
-                    }
-
-
-                    if (five > 0)
-                    {
-                        label14.Text = five.ToString("#.#####") + "%";
-                    }
-                    else
-                    {
-                        label14.Text = "0 %";
-                    }
-
-
-                    if (max > 0)
-                    {
-                        label16.Text = max.ToString("#.#####") + "%";
-                    }
-                    else
-                    {
-                        label16.Text = "0 %";
-                    }
-
-
-                    if (final > 0)
-                    {
-                        label17.Text = final.ToString("#.#####") + "%";
-                    }
-                    else
-                    {
-                        label17.Text = "0 %";
-                    }
-
-
-
-
-
-
+                    label10.Text = one.ToString("#.#####") + "%";
                 }
+                else
+                {
+                    label10.Text = "0 %";
+                }
+
+
+
+
+                if (two > 0)
+                {
+                    label11.Text = two.ToString("#.#####") + "%";
+                }
+                else
+                {
+                    label11.Text = "0 %";
+                }
+
+                if (three > 0)
+                {
+                    label12.Text = three.ToString("#.#####") + "%";
+                }
+                else
+                {
+                    label12.Text = "0 %";
+                }
+
+
+
+
+                if (four > 0)
+                {
+                    label13.Text = four.ToString("#.#####") + "%";
+                }
+                else
+                {
+                    label13.Text = "0 %";
+                }
+
+
+                if (five > 0)
+                {
+                    label14.Text = five.ToString("#.#####") + "%";
+                }
+                else
+                {
+                    label14.Text = "0 %";
+                }
+
+
+                if (max > 0)
+                {
+                    label16.Text = max.ToString("#.#####") + "%";
+                }
+                else
+                {
+                    label16.Text = "0 %";
+                }
+
+
+                if (final > 0)
+                {
+                    label17.Text = final.ToString("#.#####") + "%";
+                }
+                else
+                {
+                    label17.Text = "0 %";
+                }
+
+
+
+
+
+
+
 
 
 
