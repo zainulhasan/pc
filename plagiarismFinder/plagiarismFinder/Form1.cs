@@ -43,12 +43,7 @@ namespace plagiarismFinder
 
         private void button2_Click(object sender, EventArgs e)
         {
-            double one = 0.0;
-            double two = 0.0;
-            double three = 0.0;
-            double four = 0.0;
-            double five = 0.0;
-            double final = 0.0;
+
 
 
             string path = @"c:\daa\";
@@ -68,7 +63,7 @@ namespace plagiarismFinder
                 pdf.CreatePdf(sfiles + "ufinals.pdf", dr);
 
                 string uf = pdf.ProcessPdf(data, ws);
-                pdf.CreatePdf(userfileName,uf);
+                pdf.CreatePdf(userfileName, uf);
 
                 string[] users = pdf.ReadProcessPdf(userfileName);
 
@@ -79,91 +74,76 @@ namespace plagiarismFinder
                 string[] f5 = pdf.ReadProcessPdf(sfiles + "5s.pdf");
                 string[] ffinal = pdf.ReadProcessPdf(sfiles + "ufinals.pdf");
 
+                int[,] jaccardmatrix = new int[ffinal.Length, 6];
 
-                one = pdf.compareFiles(users, f1);
-                two = pdf.compareFiles(users, f2);
-                three = pdf.compareFiles(users, f3);
-                four = pdf.compareFiles(users, f4);
-                five = pdf.compareFiles(users, f5);
-                final = pdf.compareFiles(users, ffinal);
 
+
+                
+                
+
+
+                pdf.createMatrix(f2, ffinal, jaccardmatrix, 0, ffinal.Length);
+                pdf.createMatrix(f1, ffinal, jaccardmatrix, 0, ffinal.Length);
+                pdf.createMatrix(f3, ffinal, jaccardmatrix, 2, ffinal.Length);
+                pdf.createMatrix(f4, ffinal, jaccardmatrix, 3, ffinal.Length);
+                pdf.createMatrix(f5, ffinal, jaccardmatrix, 4, ffinal.Length);
+                pdf.createMatrix(users, ffinal, jaccardmatrix, 5, ffinal.Length);
+
+                int numOfPer =Convert.ToInt32(textBox3.Text);
+                int[,] pa = new int[ffinal.Length,numOfPer];
+                pdf.generatePermentations(pa, ffinal.Length, numOfPer);
+                int[,] resultMaxtix =  new int[numOfPer, 6];
+                pdf.finalMatrix(jaccardmatrix, pa, resultMaxtix, ffinal.Length, 6, numOfPer);
+
+                double tmp0=pdf.similarity(resultMaxtix,0,numOfPer);
+                double tmp1 = pdf.similarity(resultMaxtix, 1, numOfPer);
+                double tmp2 = pdf.similarity(resultMaxtix, 2, numOfPer);
+                double tmp3 = pdf.similarity(resultMaxtix, 3, numOfPer);
+                double tmp4 = pdf.similarity(resultMaxtix, 4, numOfPer);
+
+
+
+
+                Console.WriteLine(tmp0);
+                Console.WriteLine(tmp1);
+                Console.WriteLine(tmp2);
+                Console.WriteLine(tmp3);
+                Console.WriteLine(tmp4);
+                double max = pdf.getMax(tmp0, tmp1, tmp2, tmp3, tmp4);
+                label16.Text = (max+1) + ".pdf";
+
+
+                label10.Text = tmp0.ToString()+"%";
+                 progressBar1.Value = Convert.ToInt32(tmp0);
+
+
+
+                label11.Text = tmp1.ToString() + "%";
+                progressBar2.Value = Convert.ToInt32(tmp1) ;
+
+
+
+                label12.Text = tmp2.ToString() + "%";
+                progressBar3.Value = Convert.ToInt32(tmp2);
+
+
+                label13.Text = tmp3.ToString() + "%";
+                progressBar4.Value = Convert.ToInt32(tmp3) ;
+
+
+
+                label14.Text = tmp4.ToString() + "%";
+                progressBar5.Value =Convert.ToInt32(tmp4) ;
 
 
                 
 
 
-                double max = pdf.findMax(one, two, three, four, five);
-                if (one > 0)
-                {
-                    label10.Text = one.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label10.Text = "0 %";
-                }
 
 
 
 
-                if (two > 0)
-                {
-                    label11.Text = two.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label11.Text = "0 %";
-                }
 
-                if (three > 0)
-                {
-                    label12.Text = three.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label12.Text = "0 %";
-                }
-
-
-
-
-                if (four > 0)
-                {
-                    label13.Text = four.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label13.Text = "0 %";
-                }
-
-
-                if (five > 0)
-                {
-                    label14.Text = five.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label14.Text = "0 %";
-                }
-
-
-                if (max > 0)
-                {
-                    label16.Text = max.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label16.Text = "0 %";
-                }
-
-
-                if (final > 0)
-                {
-                    label17.Text = final.ToString("#.#####") + "%";
-                }
-                else
-                {
-                    label17.Text = "0 %";
-                }
 
 
 
@@ -175,6 +155,36 @@ namespace plagiarismFinder
 
 
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
