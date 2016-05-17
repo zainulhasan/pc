@@ -204,7 +204,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Menlo", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(395, 110);
+            this.button1.Location = new System.Drawing.Point(386, 110);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 29);
@@ -220,7 +220,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Menlo", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(395, 159);
+            this.button2.Location = new System.Drawing.Point(386, 159);
             this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 29);
@@ -360,7 +360,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 466);
+            this.ClientSize = new System.Drawing.Size(488, 466);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(label15);
             this.Controls.Add(this.progressBar5);

@@ -83,7 +83,7 @@ namespace plagiarismFinder
 
 
                 pdf.createMatrix(f2, ffinal, jaccardmatrix, 0, ffinal.Length);
-                pdf.createMatrix(f1, ffinal, jaccardmatrix, 0, ffinal.Length);
+                pdf.createMatrix(f1, ffinal, jaccardmatrix, 1, ffinal.Length);
                 pdf.createMatrix(f3, ffinal, jaccardmatrix, 2, ffinal.Length);
                 pdf.createMatrix(f4, ffinal, jaccardmatrix, 3, ffinal.Length);
                 pdf.createMatrix(f5, ffinal, jaccardmatrix, 4, ffinal.Length);
